@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import './widgets/neumorphism-button.dart';
 import './constants.dart';
 
 void main() {
@@ -36,6 +37,7 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
+    final _isPicked = false;
     return Scaffold(
       backgroundColor: bgColor,
       appBar: AppBar(
@@ -57,8 +59,8 @@ class _MyHomePageState extends State<MyHomePage> {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              Text('Male'),
-              Text('Female'),
+              NeumButton(bText: 'Male'),
+              NeumButton(bText: 'Female'),
             ],
           ),
           Row(
