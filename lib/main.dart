@@ -35,9 +35,9 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  bool _value = false;
   @override
   Widget build(BuildContext context) {
-    final _isPicked = false;
     return Scaffold(
       backgroundColor: bgColor,
       appBar: AppBar(
@@ -52,9 +52,8 @@ class _MyHomePageState extends State<MyHomePage> {
           ),
         ),
       ),
-      body: Container(
-          child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -64,21 +63,66 @@ class _MyHomePageState extends State<MyHomePage> {
             ],
           ),
           Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              Text('Pick your height'),
+              Container(
+                padding: const EdgeInsets.all(10),
+                height: 350,
+                width: 150,
+                decoration: neumContanerEffect,
+                child: Column(
+                  children: [
+                    Container(
+                      height: 35,
+                      width: 120,
+                      decoration: BoxDecoration(
+                        color: pColor.withOpacity(0.2),
+                        borderRadius: BorderRadius.circular(15),
+                      ),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          const Text('cm'),
+                          Switch(
+                            activeColor: pColor,
+                            inactiveThumbColor: sColor,
+                            value: _value,
+                            onChanged: (val) {
+                              setState(() {
+                                _value = val;
+                              });
+                            },
+                          ),
+                          const Text('ft')
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              ),
               Column(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text('Weight'),
-                  Text('Age'),
+                  Container(
+                    height: 150,
+                    width: 150,
+                    decoration: neumContanerEffect,
+                  ),
+                  const SizedBox(
+                    height: 50,
+                  ),
+                  Container(
+                    height: 150,
+                    width: 150,
+                    decoration: neumContanerEffect,
+                  ),
                 ],
               ),
             ],
           ),
-          Text('Calculate'),
+          NeumButton(bText: 'Calculate'),
         ],
-      )),
+      ),
     );
   }
 }
