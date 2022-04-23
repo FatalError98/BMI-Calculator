@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import './widgets/neumorphism-button.dart';
+import './widgets/unit-switch.dart';
 import './constants.dart';
 
 void main() {
@@ -35,7 +36,6 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  bool _value = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -72,31 +72,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 decoration: neumContanerEffect,
                 child: Column(
                   children: [
-                    Container(
-                      height: 35,
-                      width: 120,
-                      decoration: BoxDecoration(
-                        color: pColor.withOpacity(0.2),
-                        borderRadius: BorderRadius.circular(15),
-                      ),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          const Text('cm'),
-                          Switch(
-                            activeColor: pColor,
-                            inactiveThumbColor: sColor,
-                            value: _value,
-                            onChanged: (val) {
-                              setState(() {
-                                _value = val;
-                              });
-                            },
-                          ),
-                          const Text('ft')
-                        ],
-                      ),
-                    ),
+                    UnitSwitch(mainUnit: 'cm', secondaryUnit: 'ft'),
                   ],
                 ),
               ),
@@ -104,9 +80,15 @@ class _MyHomePageState extends State<MyHomePage> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Container(
+                    padding: const EdgeInsets.all(10),
                     height: 150,
                     width: 150,
                     decoration: neumContanerEffect,
+                    child: Column(
+                      children: [
+                        UnitSwitch(mainUnit: 'kg', secondaryUnit: 'lb'),
+                      ],
+                    ),
                   ),
                   const SizedBox(
                     height: 50,

@@ -47,7 +47,11 @@ class _NeumButtonState extends State<NeumButton> {
             ),
           ],
         ),
-        child: Center(child: Text(widget.bText)),
+        child: Center(
+            child: Text(
+          widget.bText,
+          style: TextStyle(color: sFontColor, fontSize: 17.0),
+        )),
       ),
     );
   }
