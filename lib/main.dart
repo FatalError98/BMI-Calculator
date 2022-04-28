@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:numberpicker/numberpicker.dart';
 
+import './global variables/globals.dart' as globals;
 import './widgets/neumorphism-button.dart';
 import './widgets/unit-switch.dart';
 import './constants.dart';
@@ -36,6 +38,8 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  double _currentValue = 80;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -62,43 +66,48 @@ class _MyHomePageState extends State<MyHomePage> {
               NeumButton(bText: 'Female'),
             ],
           ),
+          Container(
+            padding: const EdgeInsets.all(10),
+            height: 150,
+            width: 330,
+            decoration: neumContanerEffect,
+            child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  Text(
+                    !globals.switchValues
+                        ? 'Height: ${_currentValue.toInt()}'
+                        : 'Height: ${(_currentValue / 30.48).toStringAsFixed(1)}',
+                    style: const TextStyle(color: sFontColor, fontSize: 18.0),
+                  ),
+                  Slider(
+                    value: _currentValue,
+                    min: 80,
+                    max: 240,
+                    onChanged: (value) => setState(() {
+                      _currentValue = value;
+                    }),
+                  ),
+                  UnitSwitch(mainUnit: 'cm', secondaryUnit: 'ft'),
+                ]),
+          ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               Container(
                 padding: const EdgeInsets.all(10),
-                height: 350,
+                height: 150,
                 width: 150,
                 decoration: neumContanerEffect,
-                child: Column(
-                  children: [
-                    UnitSwitch(mainUnit: 'cm', secondaryUnit: 'ft'),
-                  ],
-                ),
+                child: Column(children: [
+                  UnitSwitch(mainUnit: 'kg', secondaryUnit: 'lb'),
+                ]),
               ),
-              Column(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Container(
-                    padding: const EdgeInsets.all(10),
-                    height: 150,
-                    width: 150,
-                    decoration: neumContanerEffect,
-                    child: Column(
-                      children: [
-                        UnitSwitch(mainUnit: 'kg', secondaryUnit: 'lb'),
-                      ],
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 50,
-                  ),
-                  Container(
-                    height: 150,
-                    width: 150,
-                    decoration: neumContanerEffect,
-                  ),
-                ],
+              Container(
+                padding: const EdgeInsets.all(10),
+                height: 150,
+                width: 150,
+                decoration: neumContanerEffect,
               ),
             ],
           ),

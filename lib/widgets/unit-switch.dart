@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../global variables/globals.dart' as globals;
 import '../constants.dart';
 
 class UnitSwitch extends StatefulWidget {
@@ -16,7 +17,6 @@ class UnitSwitch extends StatefulWidget {
 }
 
 class _UnitSwitchState extends State<UnitSwitch> {
-  bool _value = false;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -40,11 +40,12 @@ class _UnitSwitchState extends State<UnitSwitch> {
           Switch(
             activeColor: pColor,
             inactiveThumbColor: sColor,
-            value: _value,
+            value: globals.switchValues,
             onChanged: (val) {
               setState(() {
-                _value = val;
+                globals.switchValues = val;
               });
+              print(globals.switchValues);
             },
           ),
           Text(
