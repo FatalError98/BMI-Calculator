@@ -38,7 +38,9 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  double _currentValue = 80;
+  double _currentValue = 80.0;
+  int _currentWeightValue = 20;
+  int _currentAgeValue = 18;
 
   @override
   Widget build(BuildContext context) {
@@ -99,15 +101,58 @@ class _MyHomePageState extends State<MyHomePage> {
                 height: 150,
                 width: 150,
                 decoration: neumContanerEffect,
-                child: Column(children: [
-                  UnitSwitch(mainUnit: 'kg', secondaryUnit: 'lb'),
-                ]),
+                child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      const Text(
+                        'Weight',
+                        style: TextStyle(color: sFontColor, fontSize: 18.0),
+                      ),
+                      NumberPicker(
+                        selectedTextStyle:
+                            const TextStyle(color: pColor, fontSize: 20.0),
+                        textStyle: const TextStyle(color: sFontColor),
+                        axis: Axis.horizontal,
+                        itemCount: 1,
+                        minValue: 1,
+                        maxValue: 500,
+                        value: _currentWeightValue,
+                        onChanged: (val) => setState(() {
+                          _currentWeightValue = val;
+                        }),
+                      ),
+                      UnitSwitch(mainUnit: 'kg', secondaryUnit: 'lb'),
+                    ]),
               ),
               Container(
                 padding: const EdgeInsets.all(10),
                 height: 150,
                 width: 150,
                 decoration: neumContanerEffect,
+                child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      const Text(
+                        'Age',
+                        style: TextStyle(color: sFontColor, fontSize: 18.0),
+                      ),
+                      NumberPicker(
+                        selectedTextStyle:
+                            const TextStyle(color: pColor, fontSize: 20.0),
+                        textStyle: const TextStyle(color: sFontColor),
+                        axis: Axis.horizontal,
+                        itemCount: 1,
+                        minValue: 1,
+                        maxValue: 130,
+                        value: _currentAgeValue,
+                        onChanged: (val) => setState(() {
+                          _currentAgeValue = val;
+                        }),
+                      ),
+                      const SizedBox(
+                        height: 35,
+                      )
+                    ]),
               ),
             ],
           ),
