@@ -2,31 +2,39 @@ import 'package:flutter/material.dart' hide BoxDecoration, BoxShadow;
 import 'package:flutter_inset_box_shadow/flutter_inset_box_shadow.dart';
 
 import '../constants.dart';
+import '../global variables/globals.dart' as globals;
 
 class NeumButton extends StatefulWidget {
-  final String bText;
-  NeumButton({required this.bText});
+  final Widget buttonChild;
+  final double height;
+  final double width;
+  final Function onPressed;
+  NeumButton(
+      {required this.buttonChild,
+      required this.height,
+      required this.width,
+      required this.onPressed});
 
   @override
   State<NeumButton> createState() => _NeumButtonState();
 }
 
 class _NeumButtonState extends State<NeumButton> {
-  bool _isPressed = false;
   @override
   Widget build(BuildContext context) {
-    Offset distance = _isPressed ? const Offset(2, 2) : const Offset(4, 4);
-    double blur = _isPressed ? 6.0 : 15.0;
+    Offset distance =
+        globals.isPressed ? const Offset(2, 2) : const Offset(4, 4);
+    double blur = globals.isPressed ? 6.0 : 15.0;
     return GestureDetector(
       onTap: () {
         setState(() {
-          _isPressed = !_isPressed;
+          widget.onPressed;
         });
       },
       child: AnimatedContainer(
         duration: const Duration(milliseconds: 201),
-        height: 40,
-        width: 150,
+        height: widget.height,
+        width: widget.width,
         decoration: BoxDecoration(
           color: bgColor,
           borderRadius: BorderRadius.circular(15),
@@ -36,22 +44,18 @@ class _NeumButtonState extends State<NeumButton> {
               offset: distance,
               blurRadius: blur,
               spreadRadius: 1,
-              inset: _isPressed,
+              inset: globals.isPressed,
             ),
             BoxShadow(
               color: Colors.white,
               offset: -distance,
               blurRadius: blur,
               spreadRadius: 1,
-              inset: _isPressed,
+              inset: globals.isPressed,
             ),
           ],
         ),
-        child: Center(
-            child: Text(
-          widget.bText,
-          style: TextStyle(color: sFontColor, fontSize: 17.0),
-        )),
+        child: Center(child: widget.buttonChild),
       ),
     );
   }
