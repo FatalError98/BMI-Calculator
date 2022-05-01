@@ -9,6 +9,8 @@ enum Gender {
   female,
 }
 
-double heightValue = 80.0;
+double heightValue = 160.0;
 int weightValue = 50;
 int ageValue = 18;
+
+double bmi = 0.0;

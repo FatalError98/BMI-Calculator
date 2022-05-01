@@ -1,11 +1,13 @@
+import 'dart:math';
+
+import 'package:bmicalculator/screens/bmi_result_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:numberpicker/numberpicker.dart';
 
 import '../widgets/neum_container.dart';
 import '../widgets/gender_container.dart';
 import '../global variables/globals.dart' as globals;
-import '../widgets/neumorphism-button.dart';
-import '../widgets/unit-switch.dart';
+// import '../widgets/unit-switch.dart';
 import '../constants.dart';
 
 class MainScreen extends StatefulWidget {
@@ -28,11 +30,6 @@ class _MainScreenState extends State<MainScreen> {
         maleFontColor = activeFontColor;
         femaleBoxColor = inActiveColor;
         femaleFontColor = inActiveFontColor;
-      } else {
-        maleBoxColor = inActiveColor;
-        maleFontColor = inActiveFontColor;
-        femaleBoxColor = activeColor;
-        femaleFontColor = activeFontColor;
       }
     } else {
       if (femaleBoxColor == inActiveColor) {
@@ -40,13 +37,18 @@ class _MainScreenState extends State<MainScreen> {
         femaleFontColor = activeFontColor;
         maleBoxColor = inActiveColor;
         maleFontColor = inActiveFontColor;
-      } else {
-        femaleBoxColor = inActiveColor;
-        femaleFontColor = inActiveFontColor;
-        maleBoxColor = activeColor;
-        maleFontColor = activeFontColor;
       }
     }
+  }
+
+  void selectCategory(BuildContext ctx) {
+    Navigator.of(ctx).push(
+      MaterialPageRoute(
+        builder: (_) {
+          return BmiResultScreen(globals.bmi);
+        },
+      ),
+    );
   }
 
   @override
@@ -109,26 +111,46 @@ class _MainScreenState extends State<MainScreen> {
           ),
           NeumContainer(
             color: bgColor,
-            height: 150,
+            height: 170,
             width: 330,
             child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  Text(
-                    !globals.switchValues
-                        ? 'Height: ${globals.heightValue.toInt()}'
-                        : 'Height: ${(globals.heightValue / 30.48).toStringAsFixed(1)}',
-                    style: const TextStyle(color: sFontColor, fontSize: 18.0),
+                  const Text(
+                    'Height',
+                    style: TextStyle(color: sFontColor, fontSize: 18.0),
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        // !globals.switchValues
+                        //     ?
+                        '${globals.heightValue.toInt()}',
+                        // : (globals.heightValue / 30.48).toStringAsFixed(1),
+                        style: const TextStyle(
+                          color: sFontColor,
+                          fontSize: 25.0,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      const Text(
+                        // !globals.switchValues ?
+                        ' cm',
+                        // : ' ft',
+                        style: TextStyle(color: sFontColor, fontSize: 18.0),
+                      ),
+                    ],
                   ),
                   Slider(
                     value: globals.heightValue,
-                    min: 80,
-                    max: 240,
+                    min: 50,
+                    max: 250,
                     onChanged: (value) => setState(() {
                       globals.heightValue = value;
                     }),
                   ),
-                  UnitSwitch(mainUnit: 'cm', secondaryUnit: 'ft'),
+                  // UnitSwitch(mainUnit: 'cm', secondaryUnit: 'ft'),
                 ]),
           ),
           Row(
@@ -160,7 +182,35 @@ class _MainScreenState extends State<MainScreen> {
                           },
                         ),
                       ),
-                      UnitSwitch(mainUnit: 'kg', secondaryUnit: 'lb'),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          Container(
+                            height: 35,
+                            width: 35,
+                            child: FloatingActionButton(
+                              heroTag: 'btn1',
+                              onPressed: () => setState(() {
+                                globals.weightValue++;
+                              }),
+                              child: const Icon(Icons.add),
+                            ),
+                          ),
+                          Container(
+                            height: 35,
+                            width: 35,
+                            child: FloatingActionButton(
+                              heroTag: 'btn2',
+                              onPressed: () => setState(() {
+                                if (globals.weightValue > 0)
+                                  globals.weightValue--;
+                              }),
+                              child: const Icon(Icons.remove),
+                            ),
+                          ),
+                        ],
+                      ),
+                      // UnitSwitch(mainUnit: 'kg', secondaryUnit: 'lb'),
                     ]),
               ),
               NeumContainer(
@@ -187,25 +237,60 @@ class _MainScreenState extends State<MainScreen> {
                           globals.ageValue = val;
                         }),
                       ),
-                      const SizedBox(
-                        height: 35,
-                      )
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          Container(
+                            height: 35,
+                            width: 35,
+                            child: FloatingActionButton(
+                              heroTag: 'btn3',
+                              onPressed: () => setState(() {
+                                globals.ageValue++;
+                              }),
+                              child: const Icon(Icons.add),
+                            ),
+                          ),
+                          Container(
+                            height: 35,
+                            width: 35,
+                            child: FloatingActionButton(
+                              heroTag: 'btn4',
+                              onPressed: () => setState(() {
+                                if (globals.ageValue > 0) globals.ageValue--;
+                              }),
+                              child: const Icon(Icons.remove),
+                            ),
+                          ),
+                        ],
+                      ),
                     ]),
               ),
             ],
           ),
-          NeumButton(
-            height: 40,
-            width: 150,
-            buttonChild: const Text(
-              'Calculate',
-              style: TextStyle(color: sFontColor, fontSize: 17.0),
-            ),
-            onPressed: () {
-              var bmi = globals.weightValue /
-                  (globals.heightValue * globals.heightValue);
-              print(bmi);
+          GestureDetector(
+            onTap: () {
+              globals.bmi =
+                  // !globals.switchValues
+                  //     ?
+                  globals.weightValue / pow(globals.heightValue / 100, 2.0);
+              // : 703 *
+              //     (globals.weightValue /
+              //         pow(globals.heightValue * 12, 2.0));
+              // print(bmi.toStringAsFixed(1));
+              selectCategory(context);
             },
+            child: NeumContainer(
+              color: pColor,
+              height: 50,
+              width: 160,
+              child: const Center(
+                child: Text(
+                  'Calculate',
+                  style: TextStyle(color: bgColor, fontSize: 17.0),
+                ),
+              ),
+            ),
           ),
         ],
       ),
