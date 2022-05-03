@@ -8,7 +8,7 @@ class NeumContainer extends StatelessWidget {
   final double width;
   final Widget child;
 
-  NeumContainer(
+  const NeumContainer(
       {required this.child,
       required this.height,
       required this.width,

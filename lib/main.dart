@@ -4,7 +4,7 @@ import './constants.dart';
 import './screens/main_screen.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -22,7 +22,7 @@ class MyApp extends StatelessWidget {
           secondary: sColor,
         ),
       ),
-      home: MainScreen(),
+      home: const MainScreen(),
     );
   }
 }

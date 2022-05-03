@@ -185,7 +185,7 @@ class _MainScreenState extends State<MainScreen> {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
-                          Container(
+                          SizedBox(
                             height: 35,
                             width: 35,
                             child: FloatingActionButton(
@@ -196,14 +196,15 @@ class _MainScreenState extends State<MainScreen> {
                               child: const Icon(Icons.add),
                             ),
                           ),
-                          Container(
+                          SizedBox(
                             height: 35,
                             width: 35,
                             child: FloatingActionButton(
                               heroTag: 'btn2',
                               onPressed: () => setState(() {
-                                if (globals.weightValue > 0)
+                                if (globals.weightValue > 0) {
                                   globals.weightValue--;
+                                }
                               }),
                               child: const Icon(Icons.remove),
                             ),
@@ -240,7 +241,7 @@ class _MainScreenState extends State<MainScreen> {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
-                          Container(
+                          SizedBox(
                             height: 35,
                             width: 35,
                             child: FloatingActionButton(
@@ -251,7 +252,7 @@ class _MainScreenState extends State<MainScreen> {
                               child: const Icon(Icons.add),
                             ),
                           ),
-                          Container(
+                          SizedBox(
                             height: 35,
                             width: 35,
                             child: FloatingActionButton(
@@ -273,18 +274,19 @@ class _MainScreenState extends State<MainScreen> {
               globals.bmi =
                   // !globals.switchValues
                   //     ?
-                  globals.weightValue / pow(globals.heightValue / 100, 2.0);
+                  globals.weightValue /
+                      pow(globals.heightValue.round() / 100, 2.0);
               // : 703 *
               //     (globals.weightValue /
               //         pow(globals.heightValue * 12, 2.0));
               // print(bmi.toStringAsFixed(1));
               selectCategory(context);
             },
-            child: NeumContainer(
+            child: const NeumContainer(
               color: pColor,
               height: 50,
               width: 160,
-              child: const Center(
+              child: Center(
                 child: Text(
                   'Calculate',
                   style: TextStyle(color: bgColor, fontSize: 17.0),

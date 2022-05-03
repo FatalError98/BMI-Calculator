@@ -1,16 +1,15 @@
 import 'package:flutter/material.dart';
 
-import '../constants.dart';
-
 class GenderContainer extends StatelessWidget {
   final String title;
   final String imgPath;
   final Color fontColor;
   const GenderContainer({
+    Key? key,
     required this.title,
     required this.imgPath,
     required this.fontColor,
-  });
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

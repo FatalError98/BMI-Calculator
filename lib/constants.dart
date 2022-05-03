@@ -32,3 +32,13 @@ const inActiveFontColor = Color.fromRGBO(116, 125, 140, 1);
 //     ),
 //   ],
 // );
+
+const TextStyle weightStyle =
+    TextStyle(color: sColor, fontWeight: FontWeight.bold, fontSize: 14);
+
+const TextStyle weightMsg =
+    TextStyle(color: sFontColor, fontWeight: FontWeight.w400);
+
+const lowSpacer = SizedBox(height: 10.0);
+const mediamSpacer = SizedBox(height: 30.0);
+const highSpacer = SizedBox(height: 50.0);
