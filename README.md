@@ -1,7 +1,7 @@
 # BMI Calculator
  
- [![GitHub contributors][contributors-shield]][contributors-url]
- 
+ [![contributors][contributors-shield]][contributors-url]
+
 <!-- 
  ![GitHub contributors](https://img.shields.io/github/contributors/FatalError98/BMI-Calculator?style=for-the-badge) -->
 ![GitHub](https://img.shields.io/github/license/FatalError98/BMI-Calculator?style=for-the-badge)
